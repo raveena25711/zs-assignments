@@ -4,6 +4,9 @@
 # Log file
 *.log
 .idea
+assignment-1-matrix/target
+assignment-1-matrix/src/test
+
 # BlueJ files
 *.ctxt
 
