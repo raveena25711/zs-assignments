@@ -54,7 +54,7 @@ public class Matrix {
         Integer i;
         Integer j;
         Integer k;
-        Number resultsMatrix[][] = new Number[matrixA.length][matrixA[0].length];
+        Number resultsMatrix[][] = new Number[matrixA.length][matrixB[0].length];
         System.out.println("result of multiplication matrix");
         for(i=0;i<matrixA.length;i++){
             for(j=0;j<matrixA.length;j++){
