@@ -2,18 +2,18 @@ package com.raveena.matrix;
 
 public class Matrix {
     public static void main(String[] args) {
-        Integer firstMatrix[][] = {{1, 2, 3}, {2, 3, 4}, {2, 3, 4}};
-        Integer secondMatrix[][] = {{1, 2, 3}, {2, 3, 4}, {2, 3, 4}};
+        Integer matrixA[][] = {{1, 2, 3}, {2, 3, 4}, {2, 3, 4}};
+        Integer matrixB[][] = {{1, 2, 3}, {2, 3, 4}, {2, 3, 4}};
 
-        Number[][] addingOfTwoMatrix = getAddingOfTwoMatrices(firstMatrix, secondMatrix);
+        Number[][] addingOfTwoMatrix = getAddingOfTwoMatrices(matrixA, matrixB);
         printMatrix(addingOfTwoMatrix);
-        Number[][] subtractingOfTwoMatrices = getSubstractingOfTwoMatrices(firstMatrix, secondMatrix);
+        Number[][] subtractingOfTwoMatrices = getSubstractingOfTwoMatrices(matrixA, matrixB);
         printMatrix(subtractingOfTwoMatrices);
-        Number[][] multiplicationOfTwoMatrices = getMultiplicationOfTwoMatrices(firstMatrix, secondMatrix);
+        Number[][] multiplicationOfTwoMatrices = getMultiplicationOfTwoMatrices(matrixA, matrixB);
         printMatrix(multiplicationOfTwoMatrices);
-        Number[][] scalarMatrix = getscalarMatrix(firstMatrix);
+        Number[][] scalarMatrix = getscalarMatrix(matrixA);
         printMatrix(scalarMatrix);
-        Number[][] transposeOfTwoMatrices = getTransposeOfTwoMatrices(firstMatrix);
+        Number[][] transposeOfTwoMatrices = getTransposeOfTwoMatrices(matrixA);
         printMatrix(transposeOfTwoMatrices);
     }
 
@@ -26,41 +26,41 @@ public class Matrix {
         }
     }
 
-    public static Number[][] getAddingOfTwoMatrices(Number[][] firstMatrix, Number[][] secondMatrix) {
-        Number resultsMatrix[][] = new Number[firstMatrix.length][firstMatrix[0].length];
+    public static Number[][] getAddingOfTwoMatrices(Number[][] matrixA, Number[][] matrixB) {
+        Number resultsMatrix[][] = new Number[matrixA.length][matrixA[0].length];
         Integer i;
         Integer j;
         System.out.println("result of add matrix");
-        for (i = 0; i < firstMatrix.length; i++) {
-            for (j = 0; j < firstMatrix[0].length; j++) {
-                resultsMatrix[i][j] = firstMatrix[i][j].doubleValue() + secondMatrix[i][j].doubleValue();
+        for (i = 0; i < matrixA.length; i++) {
+            for (j = 0; j < matrixA[0].length; j++) {
+                resultsMatrix[i][j] = matrixA[i][j].doubleValue() + matrixB[i][j].doubleValue();
             }
         }  return resultsMatrix;
     }
 
-    public static Number[][] getSubstractingOfTwoMatrices(Number[][] firstMatrix, Number[][] secondMatrix) {
-        Number resultsMatrix[][] = new Number[firstMatrix.length][firstMatrix[0].length];
+    public static Number[][] getSubstractingOfTwoMatrices(Number[][] matrixA, Number[][] matrixB) {
+        Number resultsMatrix[][] = new Number[matrixA.length][matrixA[0].length];
         Integer i;
         Integer j;
         System.out.println("result of substract matrix");
-        for (i = 0; i < firstMatrix.length; i++) {
-            for (j = 0; j < firstMatrix[0].length; j++) {
-                resultsMatrix[i][j] = firstMatrix[i][j].doubleValue() - secondMatrix[i][j].doubleValue();
+        for (i = 0; i < matrixA.length; i++) {
+            for (j = 0; j < matrixA[0].length; j++) {
+                resultsMatrix[i][j] = matrixA[i][j].doubleValue() - matrixB[i][j].doubleValue();
             }
         }return resultsMatrix;
     }
 
-    public static Number[][] getMultiplicationOfTwoMatrices(Number[][] firstMatrix, Number[][] secondMatrix) {
+    public static Number[][] getMultiplicationOfTwoMatrices(Number[][] matrixA, Number[][] matrixB) {
         Integer i;
         Integer j;
         Integer k;
-        Number resultsMatrix[][] = new Number[firstMatrix.length][firstMatrix[0].length];
+        Number resultsMatrix[][] = new Number[matrixA.length][matrixA[0].length];
         System.out.println("result of multiplication matrix");
-        for(i=0;i<firstMatrix.length;i++){
-            for(j=0;j<firstMatrix.length;j++){
+        for(i=0;i<matrixA.length;i++){
+            for(j=0;j<matrixA.length;j++){
                 Double multipliedValue=0.0;
-                for(k=0;k<secondMatrix[0].length;k++){
-                    multipliedValue+=firstMatrix[i][k].doubleValue()*secondMatrix[k][j].doubleValue();
+                for(k=0;k<matrixB[0].length;k++){
+                    multipliedValue+=matrixA[i][k].doubleValue()*matrixB[k][j].doubleValue();
                 }
                 resultsMatrix[i][j]=multipliedValue;
                 multipliedValue=0.0;
@@ -69,30 +69,30 @@ public class Matrix {
         return resultsMatrix;
     }
 
-    public static Number[][] getscalarMatrix(Number[][] firstMatrix) {
+    public static Number[][] getscalarMatrix(Number[][] matrixA) {
         Integer i;
         Integer j;
         Integer k = 2;
-        Number resultsMatrix[][] = new Number[firstMatrix.length][firstMatrix[0].length];
+        Number resultsMatrix[][] = new Number[matrixA.length][matrixA[0].length];
         System.out.println("result of scalar matrix");
-        for (i = 0; i < firstMatrix.length; i++) {
-            for (j = 0; j < firstMatrix[0].length; j++) {
-                resultsMatrix[i][j] = firstMatrix[i][j].doubleValue() * k.doubleValue();
+        for (i = 0; i < matrixA.length; i++) {
+            for (j = 0; j < matrixA[0].length; j++) {
+                resultsMatrix[i][j] = matrixA[i][j].doubleValue() * k.doubleValue();
             }
         }
         return resultsMatrix;
     }
 
-    public static  Number[][] getTransposeOfTwoMatrices(Number[][] firstMatrix) {
+    public static  Number[][] getTransposeOfTwoMatrices(Number[][] matrixA) {
         Integer i;
         Integer j;
-        Number resultsMatrix[][] = new Number[firstMatrix.length][firstMatrix[0].length];
+        Number resultsMatrix[][] = new Number[matrixA.length][matrixA[0].length];
 
         System.out.println("result of transpose matrix");
-        for (i = 0; i < firstMatrix[0].length; i++) {
-            for (j = 0; j < firstMatrix.length; j++) {
+        for (i = 0; i < matrixA.length; i++) {
+            for (j = 0; j < matrixA[0].length; j++) {
 
-                resultsMatrix[i][j]=firstMatrix[j][i].doubleValue();
+                resultsMatrix[i][j]=matrixA[j][i].doubleValue();
             }
         }
         return resultsMatrix;
