@@ -4,9 +4,6 @@
 # Log file
 *.log
 .idea
-assignment-2-selenium/target
-assignment-2-selenium/src/test
-assignment-2-selenium/assignment-2-selenium.iml
 
 # BlueJ files
 *.ctxt
