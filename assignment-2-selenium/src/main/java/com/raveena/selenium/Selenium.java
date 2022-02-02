@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Selenium {
     public static void main(String[] args) throws InterruptedException {
@@ -20,13 +22,16 @@ public class Selenium {
         Thread.sleep(3000);
         searchElement.submit();
         List<WebElement> elements = driver.findElements(By.xpath("//div[@class=\"yuRUbf\"]"));
+        Map<String,String>map=new HashMap<>();
         for (WebElement element : elements) {
             String title = element.findElement(By.tagName("a")).findElement(By.tagName("h3")).getText();
             String url = element.findElement(By.tagName("a")).getAttribute("href");
             if (!title.equals("")) {
-                System.out.println("title: " + title);
-                System.out.println("url:" + url);
+                map.put(title,url);
             }
+        }
+        for(Map.Entry<String,String> entry : map.entrySet()){
+            System.out.println(entry.getKey() +" "+ entry.getValue());
         }
     }
 }
