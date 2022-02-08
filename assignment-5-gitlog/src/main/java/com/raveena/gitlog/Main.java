@@ -9,19 +9,64 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) throws IOException, ParseException {
-        List<LogDetails> details = readLogFile();
 
+        try {
+            File file = new File("./assignment-5-gitlog/data/log.txt");
+            if (!file.exists()) {
+                throw new FileNotExistsException("file doesn't exit");
+            }
+        } catch (FileNotExistsException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Scanner scanner = new Scanner(new File("./assignment-5-gitlog/data/log.txt"));
+
+            while (scanner.hasNextLine()) {
+                String commitSC = scanner.nextLine();
+                if (commitSC.contains("commit")) {
+                    String authorSc = scanner.nextLine();
+                    String date = scanner.nextLine();
+                    scanner.nextLine();
+                    String message = scanner.nextLine();
+                    scanner.nextLine();
+                    if (!authorSc.contains("Author:") || !date.contains("Date:")) {
+                        throw new FormatException("exception occured");
+                    }
+                }
+            }
+        }catch (FormatException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Scanner scanner = new Scanner(new File("./assignment-5-gitlog/data/log.txt"));
+
+            while (scanner.hasNextLine()) {
+                String commitSC = scanner.nextLine();
+                String authorSc = scanner.nextLine();
+                String date = scanner.nextLine();
+                if ((authorSc.length()<47) || commitSC.length()<40 || date.length()<37) {
+                    throw new IncompleteException("has incomplete information");
+                }
+                scanner.nextLine();
+                String message = scanner.nextLine();
+                scanner.nextLine();
+            }
+        }
+        catch(IncompleteException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        List<LogDetails> details = readLogFile();
         Map<String, Integer> problem1 = problem1(details);
-         System.out.println(problem1);
+        System.out.println(problem1);
         Map<String,Map<String, Integer>> problem2=problem2(details);
         System.out.println(problem2);
-        List<String> authorName=problem3(details);
-        System.out.println(authorName);
-        exceptions();
-
-
-
+        List<String> problem3=problem3(details);
+        System.out.println(problem3);
     }
+
 
     private static Map<String, Integer> problem1(List<LogDetails> details) throws ParseException {
         Map<String, Integer> count = new HashMap<>();
@@ -82,7 +127,7 @@ public class Main {
     }
 
     private static List<String> problem3(List<LogDetails> details) throws ParseException {
-        SortedSet<String> ts = new TreeSet<String>();
+        SortedSet<String> dates = new TreeSet<String>();
         for (LogDetails log : details) {
             String specificDate = "2 Feb 2022";
             SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
@@ -94,16 +139,15 @@ public class Main {
             Date Date = format.parse(everyDate);
             Calendar cal2 = Calendar.getInstance();
             cal2.setTime(Date);
-
             if (cal2.after(cal1)) {
-                if (!ts.contains(log.getDate())){
-                    ts.add(log.getDate());
+                if (!dates.contains(log.getDate())){
+                    dates.add(log.getDate());
                 }
             }
         }
         List<String> authorName=new ArrayList<>();
         for(LogDetails log:details){
-            if(ts.equals(log.getDate())){
+            if(dates.equals(log.getDate())){
                 if(log.getMessage().isEmpty()){
 
                      authorName.add(log.getAuthor());
@@ -113,25 +157,15 @@ public class Main {
         return authorName;
     }
 
-    public static void exceptions(){
-        try {
-            File file = new File("/home/raveena/Desktop/zs-java-assignments-nallaraveena/assignment-5-gitlog/data/log.txt");
-            FileReader fr = new FileReader(file);
-            System.out.println("file exits");
-        }catch (FileNotFoundException e){
-            System.out.println("file doesn't exit");
-        }
-    }
-
-    public static List<LogDetails> readLogFile() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("./assignment-5-gitlog/data/log.txt"));
+    public static List<LogDetails> readLogFile()  {
         List<LogDetails> logDetails = new ArrayList<>();
+        try{
+            Scanner scanner = new Scanner(new File("./assignment-5-gitlog/data/log.txt"));
         while (scanner.hasNextLine()) {
-            try {
                 LogDetails logDetailsModel = new LogDetails();
-                String commitSC = scanner.nextLine();
-                String[] authorSc = scanner.nextLine().split("\\s");
-                String author= authorSc[1];
+                String commits = scanner.nextLine();
+                String[] authors = scanner.nextLine().split("\\s");
+                String author= authors[1];
                 String[] date = scanner.nextLine().split("\\s");
                 String dateAsString=date[5]+" "+date[4]+" "+date[7];
                 scanner.nextLine();
@@ -139,13 +173,13 @@ public class Main {
                 scanner.nextLine();
                 logDetailsModel.setAuthor(author);
                 logDetailsModel.setDate(dateAsString);
-                logDetailsModel.setCommit(commitSC);
+                logDetailsModel.setCommit(commits);
                 logDetailsModel.setMessage(message);
                 logDetails.add(logDetailsModel);
-            } catch (Exception e) {
             }
-        }return logDetails;
+        }catch (Exception e) {
+        }
+        return logDetails;
     }
-
    }
 
