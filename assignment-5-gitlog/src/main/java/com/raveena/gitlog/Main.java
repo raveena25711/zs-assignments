@@ -21,14 +21,14 @@ public class Main {
             Scanner scanner = new Scanner(new File("./assignment-5-gitlog/data/log.txt"));
 
             while (scanner.hasNextLine()) {
-                String commitSC = scanner.nextLine();
-                if (commitSC.contains("commit")) {
-                    String authorSc = scanner.nextLine();
+                String commit = scanner.nextLine();
+                if (commit.contains("commit")) {
+                    String author = scanner.nextLine();
                     String date = scanner.nextLine();
                     scanner.nextLine();
                     String message = scanner.nextLine();
                     scanner.nextLine();
-                    if (!authorSc.contains("Author:") || !date.contains("Date:")) {
+                    if (!author.contains("Author:") || !date.contains("Date:")) {
                         throw new FormatException("exception occured");
                     }
                 }
@@ -36,15 +36,14 @@ public class Main {
         }catch (FormatException e) {
             e.printStackTrace();
         }
-
         try {
             Scanner scanner = new Scanner(new File("./assignment-5-gitlog/data/log.txt"));
 
             while (scanner.hasNextLine()) {
-                String commitSC = scanner.nextLine();
-                String authorSc = scanner.nextLine();
+                String commit = scanner.nextLine();
+                String author = scanner.nextLine();
                 String date = scanner.nextLine();
-                if ((authorSc.length()<47) || commitSC.length()<40 || date.length()<37) {
+                if ((author.length()<47) || commit.length()<40 || date.length()<37) {
                     throw new IncompleteException("has incomplete information");
                 }
                 scanner.nextLine();
@@ -56,15 +55,13 @@ public class Main {
             e.printStackTrace();
         }
 
-        List<LogDetails> details = readLogFile();
+       List<LogDetails> details = readLogFile();
         Map<String, Integer> problem1 = problem1(details);
         System.out.println(problem1);
         Map<String,Map<String, Integer>> problem2=problem2(details);
         System.out.println(problem2);
-        List<String> problem3=problem3(details);
-        System.out.println(problem3);
+        problem3try3(details);
     }
-
 
     private static Map<String, Integer> problem1(List<LogDetails> details) throws ParseException {
         Map<String, Integer> count = new HashMap<>();
@@ -124,35 +121,34 @@ public class Main {
         return map2;
     }
 
-    private static List<String> problem3(List<LogDetails> details) throws ParseException {
-        SortedSet<String> dates = new TreeSet<String>();
-        for (LogDetails log : details) {
-            String specificDate = "2 Feb 2022";
-            SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-            Date strDate = formatter.parse(specificDate);
-            Calendar cal1 = Calendar.getInstance();
-            cal1.setTime(strDate);
-            String everyDate = log.getDate();
-            SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy");
-            Date Date = format.parse(everyDate);
-            Calendar cal2 = Calendar.getInstance();
-            cal2.setTime(Date);
-            if (cal2.after(cal1)) {
-                if (!dates.contains(log.getDate())){
-                    dates.add(log.getDate());
+    public static void problem3try3(List<LogDetails> details) throws ParseException {
+        Map<String, List<String>> resultedMap=new HashMap<>();
+        for(LogDetails log:details){
+
+                if (!resultedMap.containsKey(log.getAuthor())) {
+                    resultedMap.put(log.getAuthor(), new ArrayList<String>());
                 }
-            }
+            resultedMap.get(log.getAuthor()).add(log.getDate());
         }
         List<String> authorName=new ArrayList<>();
-        for(LogDetails log:details){
-            if(dates.equals(log.getDate())){
-                if(log.getMessage().isEmpty()){
-
-                     authorName.add(log.getAuthor());
+        for(Map.Entry<String, List<String>> entry : resultedMap.entrySet()) {
+            String key = entry.getKey();
+            String date="4 Feb 2022";
+            for (String value : entry.getValue()) {
+               String startingDate=date;
+               String endDate=value;
+                SimpleDateFormat format= new SimpleDateFormat("dd MMM yyyy");
+                Date date1 = format.parse(startingDate);
+                Date date2 = format.parse(endDate);
+                long differenceInTime = date2.getTime() - date1.getTime();
+                long differenceInDays = (differenceInTime / (1000 * 60 * 60 * 24));
+                if(differenceInDays>=2){
+                    authorName.add(key);
                 }
             }
         }
-        return authorName;
+        System.out.println(authorName);
+
     }
 
     public static List<LogDetails> readLogFile()  {
