@@ -9,7 +9,6 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) throws IOException, ParseException {
-
         try {
             File file = new File("./assignment-5-gitlog/data/log.txt");
             if (!file.exists()) {
@@ -18,7 +17,6 @@ public class Main {
         } catch (FileNotExistsException e) {
             e.printStackTrace();
         }
-
         try {
             Scanner scanner = new Scanner(new File("./assignment-5-gitlog/data/log.txt"));
 
