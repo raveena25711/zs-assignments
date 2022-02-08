@@ -56,15 +56,16 @@ public class Main {
         }
 
        List<LogDetails> details = readLogFile();
-        Map<String, Integer> problem1 = problem1(details);
-        System.out.println(problem1);
-        Map<String,Map<String, Integer>> problem2=problem2(details);
-        System.out.println(problem2);
-        problem3try3(details);
+        Map<String, Integer> totalCountOfCommitsByEachDeveloper = totalCountOfCommitsByEachDeveloper(details);
+        System.out.println(totalCountOfCommitsByEachDeveloper);
+        Map<String,Map<String, Integer>> countOfCommitsByEachDeveloperForEachDay=countOfCommitsByEachDeveloperForEachDay(details);
+        System.out.println(countOfCommitsByEachDeveloperForEachDay);
+        SortedSet<String> DevelopersWhoDidNotCommitInTwoDays=DevelopersWhoDidNotCommitInTwoDays(details);
+        System.out.println(DevelopersWhoDidNotCommitInTwoDays);
     }
 
-    private static Map<String, Integer> problem1(List<LogDetails> details) throws ParseException {
-        Map<String, Integer> count = new HashMap<>();
+    private static Map<String, Integer> totalCountOfCommitsByEachDeveloper(List<LogDetails> details) throws ParseException {
+        Map<String, Integer> totalCountOfCommitsByEachDeveloper = new HashMap<>();
         for (LogDetails log : details) {
             String specificDate = "2 Feb 2022";
             SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
@@ -77,17 +78,17 @@ public class Main {
             Calendar cal2 = Calendar.getInstance();
             cal2.setTime(Date);
             if (cal2.getTime().after(cal1.getTime()) || cal2.getTime().equals(cal1.getTime())) {
-                if (count.containsKey(log.getAuthor())) {
-                    count.put(log.getAuthor(), count.get(log.getAuthor()) + 1);
+                if (totalCountOfCommitsByEachDeveloper.containsKey(log.getAuthor())) {
+                    totalCountOfCommitsByEachDeveloper.put(log.getAuthor(), totalCountOfCommitsByEachDeveloper.get(log.getAuthor()) + 1);
                 } else {
-                    count.put(log.getAuthor(), 1);
+                    totalCountOfCommitsByEachDeveloper.put(log.getAuthor(), 1);
                 }
             }
         }
-        return count;
+        return totalCountOfCommitsByEachDeveloper;
     }
 
-    private static Map<String,Map<String, Integer>> problem2(List<LogDetails> details) throws ParseException {
+    private static Map<String,Map<String, Integer>> countOfCommitsByEachDeveloperForEachDay(List<LogDetails> details) throws ParseException {
         Map<String,Map<String, Integer>>map2=new HashMap<>();
         String specificDate = "2 Feb 2022";
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
@@ -110,7 +111,6 @@ public class Main {
                         map1.put(log.getDate(), 1);
                         map2.put(log.getAuthor(), map1);
                     }
-
                 }else{
                     Map<String, Integer> map1=new HashMap<>();
                     map1.put(log.getDate(), 1);
@@ -121,7 +121,7 @@ public class Main {
         return map2;
     }
 
-    public static void problem3try3(List<LogDetails> details) throws ParseException {
+    public static  SortedSet<String> DevelopersWhoDidNotCommitInTwoDays(List<LogDetails> details) throws ParseException {
         Map<String, List<String>> resultedMap=new HashMap<>();
         for(LogDetails log:details){
 
@@ -130,7 +130,7 @@ public class Main {
                 }
             resultedMap.get(log.getAuthor()).add(log.getDate());
         }
-        List<String> authorName=new ArrayList<>();
+        SortedSet<String> authorName=new TreeSet<>();
         for(Map.Entry<String, List<String>> entry : resultedMap.entrySet()) {
             String key = entry.getKey();
             String date="4 Feb 2022";
@@ -144,11 +144,10 @@ public class Main {
                 long differenceInDays = (differenceInTime / (1000 * 60 * 60 * 24));
                 if(differenceInDays>=2){
                     authorName.add(key);
-                }
+                }date=endDate;
             }
         }
-        System.out.println(authorName);
-
+        return authorName;
     }
 
     public static List<LogDetails> readLogFile()  {
