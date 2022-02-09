@@ -51,7 +51,7 @@ public class Main {
                 scanner.nextLine();
             }
         }
-        catch(IncompleteException | FileNotFoundException e) {
+        catch(IncompleteException e) {
             e.printStackTrace();
         }
 
@@ -89,7 +89,7 @@ public class Main {
     }
 
     private static Map<String,Map<String, Integer>> countOfCommitsByEachDeveloperForEachDay(List<LogDetails> details) throws ParseException {
-        Map<String,Map<String, Integer>>map2=new HashMap<>();
+        Map<String,Map<String, Integer>>countOfCommitsByEachDeveloperForEachDay=new HashMap<>();
         String specificDate = "2 Feb 2022";
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
         Date strDate = formatter.parse(specificDate);
@@ -102,36 +102,36 @@ public class Main {
             Calendar cal2 = Calendar.getInstance();
             cal2.setTime(Date);
             if (cal2.after(cal1) || cal2.equals(cal1)) {
-                if(map2.containsKey(log.getAuthor())){
-                    Map<String, Integer> map1=map2.get(log.getAuthor());
+                if(countOfCommitsByEachDeveloperForEachDay.containsKey(log.getAuthor())){
+                    Map<String, Integer> map1=countOfCommitsByEachDeveloperForEachDay.get(log.getAuthor());
                     if(map1.containsKey(log.getDate())){
                         map1.put(log.getDate(), map1.get(log.getDate())+1);
-                        map2.put(log.getAuthor(), map1);
+                        countOfCommitsByEachDeveloperForEachDay.put(log.getAuthor(), map1);
                     }else{
                         map1.put(log.getDate(), 1);
-                        map2.put(log.getAuthor(), map1);
+                        countOfCommitsByEachDeveloperForEachDay.put(log.getAuthor(), map1);
                     }
                 }else{
                     Map<String, Integer> map1=new HashMap<>();
                     map1.put(log.getDate(), 1);
-                   map2.put(log.getAuthor(), map1);
+                    countOfCommitsByEachDeveloperForEachDay.put(log.getAuthor(), map1);
                 }
             }
         }
-        return map2;
+        return countOfCommitsByEachDeveloperForEachDay;
     }
 
     public static  SortedSet<String> DevelopersWhoDidNotCommitInTwoDays(List<LogDetails> details) throws ParseException {
-        Map<String, List<String>> resultedMap=new HashMap<>();
+        Map<String, List<String>> authorAndDates=new HashMap<>();
         for(LogDetails log:details){
 
-                if (!resultedMap.containsKey(log.getAuthor())) {
-                    resultedMap.put(log.getAuthor(), new ArrayList<String>());
+                if (!authorAndDates.containsKey(log.getAuthor())) {
+                    authorAndDates.put(log.getAuthor(), new ArrayList<String>());
                 }
-            resultedMap.get(log.getAuthor()).add(log.getDate());
+            authorAndDates.get(log.getAuthor()).add(log.getDate());
         }
         SortedSet<String> authorName=new TreeSet<>();
-        for(Map.Entry<String, List<String>> entry : resultedMap.entrySet()) {
+        for(Map.Entry<String, List<String>> entry : authorAndDates.entrySet()) {
             String key = entry.getKey();
             String date="4 Feb 2022";
             for (String value : entry.getValue()) {
