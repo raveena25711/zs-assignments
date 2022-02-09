@@ -10,7 +10,7 @@ public class SystemInfo{
         String homeDirectory= homeDirectory();
         System.out.println("home directory: "+homeDirectory);
         long memory= memory();
-        System.out.println("Total memory: "+memory);
+        System.out.println("Total memory: "+memory+"GB");
         int core= core();
         System.out.println("core: "+core);
         String diskSize= diskSize();;
@@ -47,8 +47,9 @@ public class SystemInfo{
     }
 
     public static long memory(){
-        long memory = Runtime.getRuntime().totalMemory();
-        return memory;
+        long totalMemory = Runtime.getRuntime().totalMemory();
+        long memoryInGb=totalMemory/1024/1024;
+        return memoryInGb;
     }
 
     public static String diskSize(){
