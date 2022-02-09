@@ -2,6 +2,7 @@ package com.raveena.systeminfo;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
 
 public class SystemInfo {
     public static void main(String[] args){
@@ -9,8 +10,8 @@ public class SystemInfo {
         System.out.println("username: " + userName);
         String homeDirectory = homeDirectory();
         System.out.println("home directory: " + homeDirectory);
-        long memory = memory();
-        System.out.println("Total memory: " + memory + "GB");
+        int memory = memory();
+        System.out.println("Total memory: " + memory +"GB");
         int core = core();
         System.out.println("core: " + core);
         String diskSize = diskSize();
@@ -65,10 +66,10 @@ public class SystemInfo {
     /**
      * it will return the memory of a sytem and it will return the result in long data type.
      */
-    public static long memory() {
-        long totalMemory = Runtime.getRuntime().totalMemory();
-        long memoryInGb = totalMemory / 1024 / 1024;
-        return memoryInGb;
+    public static int memory() {
+        com.sun.management.OperatingSystemMXBean mxbean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+        int memory= (int) (mxbean.getTotalMemorySize()/(1024*1024*1024));
+        return memory;
     }
 
     /**
