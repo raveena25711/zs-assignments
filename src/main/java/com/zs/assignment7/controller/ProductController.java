@@ -12,10 +12,11 @@ public class ProductController {
     ProductService ps = new ProductService();
     public void Controller() {
         int number = 0;
-        while (number != 3) {
+        while (number != 4) {
             System.out.println("enter 1 for adding an product: ");
             System.out.println("enter 2 for reading the poduct info: ");
-            System.out.println("enter 3 for exit: ");
+            System.out.println("enter 3 for updating the poduct info: ");
+            System.out.println("enter 4 for exit: ");
 
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter your choose:");
@@ -24,10 +25,14 @@ public class ProductController {
                 case 1:
                     productDetails = ps.addProduct(productDetails);
                     break;
+
                 case 2:
                     ps.readProduct(productDetails);
                     break;
                 case 3:
+                    ps.update(productDetails);
+                    break;
+                case 4:
                     System.out.println("exit:");
                     break;
                 default:
