@@ -1,10 +1,9 @@
-package com.raveena.selenium;
+package com.zs.assignment2;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.Map;
 
 public class Selenium {
     public static void main(String[] args) throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", "/home/raveena/Desktop/chromedriver_linux64/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "src/main/java/com/zs/assignment2/chromedriver");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         Thread.sleep(3000);
