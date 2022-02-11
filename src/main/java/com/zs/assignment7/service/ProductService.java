@@ -60,6 +60,9 @@ public class ProductService {
             productDetailsModel.setMaterial(material);
             product.put(id, productDetailsModel);
         }
+        else{
+            System.out.println("product you are trying to update doesn't exists:");
+        }
         return productDetails;
     }
 }
