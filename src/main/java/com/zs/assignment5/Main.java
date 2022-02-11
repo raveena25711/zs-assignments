@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ParseException {
         try {
-            File file = new File("./assignment-5-gitlog/data/log.txt");
+            File file = new File("src/main/java/com/zs/assignment5/data/log.txt");
             if (!file.exists()) {
                 throw new FileNotExistsException("file doesn't exit");
             }
@@ -19,7 +19,7 @@ public class Main {
             e.printStackTrace();
         }
         try {
-            Scanner scanner = new Scanner(new File("./assignment-5-gitlog/data/log.txt"));
+            Scanner scanner = new Scanner(new File("src/main/java/com/zs/assignment5/data/log.txt"));
 
             while (scanner.hasNextLine()) {
                 String commit = scanner.nextLine();
@@ -38,7 +38,7 @@ public class Main {
             e.printStackTrace();
         }
         try {
-            Scanner scanner = new Scanner(new File("./assignment-5-gitlog/data/log.txt"));
+            Scanner scanner = new Scanner(new File("src/main/java/com/zs/assignment5/data/log.txt"));
 
             while (scanner.hasNextLine()) {
                 String commit = scanner.nextLine();
@@ -154,7 +154,7 @@ public class Main {
     public static List<LogDetails> readLogFile()  {
         List<LogDetails> logDetails = new ArrayList<>();
         try{
-            Scanner scanner = new Scanner(new File("./assignment-5-gitlog/data/log.txt"));
+            Scanner scanner = new Scanner(new File("src/main/java/com/zs/assignment5/data/log.txt"));
         while (scanner.hasNextLine()) {
                 LogDetails logDetailsModel = new LogDetails();
                 String commits = scanner.nextLine();
