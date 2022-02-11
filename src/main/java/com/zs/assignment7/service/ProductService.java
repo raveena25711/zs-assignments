@@ -65,4 +65,14 @@ public class ProductService {
         }
         return productDetails;
     }
+
+    public static Map<Integer, ProductEntity> deleteProduct(Map<Integer, ProductEntity> productDetails) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter key to remove: ");
+        Integer id = sc.nextInt();
+        if (productDetails.containsKey(id)) {
+            productDetails.remove(id);
+        }
+        return productDetails;
+    }
 }
