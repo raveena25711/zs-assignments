@@ -68,10 +68,13 @@ public class ProductService {
 
     public static Map<Integer, ProductEntity> deleteProduct(Map<Integer, ProductEntity> productDetails) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("enter key to remove: ");
+        System.out.println("enter product id to remove: ");
         Integer id = sc.nextInt();
         if (productDetails.containsKey(id)) {
             productDetails.remove(id);
+        }
+        else{
+            System.out.println("product you are trying to delete doesn't exists: ");
         }
         return productDetails;
     }
