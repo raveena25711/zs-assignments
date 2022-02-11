@@ -12,17 +12,22 @@ public class ProductController {
     ProductService ps = new ProductService();
     public void Controller() {
         int number = 0;
-        while (number != 2) {
+        while (number != 3) {
             System.out.println("enter 1 for adding an product: ");
-            System.out.println("enter 2 for exit: ");
+            System.out.println("enter 2 for reading the poduct info: ");
+            System.out.println("enter 3 for exit: ");
+
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter your choose:");
             number = sc.nextInt();
             switch (number) {
                 case 1:
-                    productDetails = ProductService.addProduct(productDetails);
+                    productDetails = ps.addProduct(productDetails);
                     break;
                 case 2:
+                    ps.readProduct(productDetails);
+                    break;
+                case 3:
                     System.out.println("exit:");
                     break;
                 default:

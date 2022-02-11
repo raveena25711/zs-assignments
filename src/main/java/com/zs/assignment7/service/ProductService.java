@@ -30,5 +30,10 @@ public class ProductService {
             product.put(id, productDetailsModel);
             return product;
         }
+    public static void readProduct(Map<Integer, ProductEntity> details) {
+        for (Integer product : details.keySet()) {
+            System.out.println(details.get(product).getId() + " " + details.get(product).getProduct() + " " + details.get(product).getModelName() + " " + details.get(product).getBrand() + " " + details.get(product).getMaterial());
+        }
+    }
     }
 
