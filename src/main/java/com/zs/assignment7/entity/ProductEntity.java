@@ -1,8 +1,9 @@
 package com.zs.assignment7.entity;
 
-
+/**
+ * created getter and setter methods of product properties
+ */
     public class ProductEntity {
-
         private Integer id;
         private String product;
         private String ModelName;

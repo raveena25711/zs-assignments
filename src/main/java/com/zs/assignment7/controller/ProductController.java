@@ -7,8 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * according to user entered number, it will call the particular method and executes it.
+ * if user enter 5 it will exit the process.
+ * if user entered number is not matching between 1 to 5 then the default message will get printed.
+ */
 public class ProductController {
     Map<Integer, ProductEntity> productDetails=new HashMap<>();
+    /**
+     * created constructor of ProductService class.
+     */
     ProductService ps = new ProductService();
     public void Controller() {
         int number = 0;
@@ -24,7 +32,7 @@ public class ProductController {
             number = sc.nextInt();
             switch (number) {
                 case 1:
-                    productDetails = ps.addProduct(productDetails);
+                    productDetails = ps.addProduct();
                     break;
 
                 case 2:

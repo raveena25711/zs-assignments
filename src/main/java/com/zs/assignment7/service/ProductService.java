@@ -9,7 +9,11 @@ import java.util.Scanner;
 public class ProductService {
     static Map<Integer, ProductEntity> product = new HashMap<>();
 
-    public static Map<Integer, ProductEntity> addProduct(Map<Integer, ProductEntity> productDetails) {
+    /**
+     *
+     * @return the map where key is integer which is product id and values are product information.
+     */
+    public static Map<Integer, ProductEntity> addProduct() {
         ProductEntity productDetailsModel = new ProductEntity();
         Scanner sc = new Scanner(System.in);
         System.out.println("Product id: ");
@@ -32,12 +36,22 @@ public class ProductService {
         return product;
     }
 
-    public static void readProduct(Map<Integer, ProductEntity> details) {
-        for (Integer product : details.keySet()) {
-            System.out.println(details.get(product).getId() + " " + details.get(product).getProduct() + " " + details.get(product).getModelName() + " " + details.get(product).getBrand() + " " + details.get(product).getMaterial());
+    /**
+     *
+     * @param productDetails
+     * it will read the information of product added.
+     */
+    public static void readProduct(Map<Integer, ProductEntity> productDetails) {
+        for (Integer product : productDetails.keySet()) {
+            System.out.println(productDetails.get(product).getId() + " " + productDetails.get(product).getProduct() + " " + productDetails.get(product).getModelName() + " " + productDetails.get(product).getBrand() + " " + productDetails.get(product).getMaterial());
         }
     }
 
+    /**
+     *
+     * @param productDetails
+     * @return map, after updating the existed product.
+     */
     public static Map<Integer, ProductEntity> update(Map<Integer, ProductEntity> productDetails) {
         ProductEntity productDetailsModel = new ProductEntity();
         Scanner sc = new Scanner(System.in);
@@ -66,6 +80,11 @@ public class ProductService {
         return productDetails;
     }
 
+    /**
+     *
+     * @param productDetails
+     * @return map, after deleting the existed product.
+     */
     public static Map<Integer, ProductEntity> deleteProduct(Map<Integer, ProductEntity> productDetails) {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter product id to remove: ");
