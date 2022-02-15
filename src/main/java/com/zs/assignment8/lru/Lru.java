@@ -29,20 +29,35 @@ public class Lru{
     {
         if(map.containsKey(key))
         {
-            Cache curr = map.get(key);
-            deque.remove(curr.key);
+            Cache currentValue= map.get(key);
+            deque.remove(currentValue.key);
         }
         else
         {
             if(deque.size() == CACHE_CAPACITY)
             {
-                int temp = deque.removeLast();
-                map.remove(temp);
+                int removeLastElement = deque.removeLast();
+                map.remove(removeLastElement);
             }
         }
         Cache newItem = new Cache(key, id, category, subCategory, productName, cost);
         deque.addFirst(newItem.key);
         map.put(key, newItem);
+    }
+
+    public int getElementFromCache(int key)
+    {
+        if(map.containsKey(key))
+        {
+            Cache current = map.get(key);
+            deque.remove(current.key);
+            deque.addFirst(current.key);
+            System.out.println("found key already exists in map so, key removed from current position and kept in head:");
+            return current.id;
+
+        }
+        System.out.println("if searching key doesn't exits it will print -1");
+        return -1;
     }
 public static void main(String[] args){
     Lru cache = new Lru();
@@ -50,5 +65,14 @@ public static void main(String[] args){
     cache.putElementInCache(2, 2,"grocery","vegitables","tomato","50");
     cache.putElementInCache(3, 3,"electronic","laptops","dell","50000");
     cache.putElementInCache(4, 4,"electronic","desktops","iMac","200000");
+    System.out.println(cache.getElementFromCache(2));
+    System.out.println();
+    System.out.println(deque);
+    System.out.println();
+    System.out.println(cache.getElementFromCache(5));
+    cache.putElementInCache(5,5,"grocery","fruits","apple","200");
+    System.out.println();
+    System.out.println(deque);
+    System.out.println();
 }
 }
