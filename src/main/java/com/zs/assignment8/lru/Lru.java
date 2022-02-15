@@ -10,6 +10,15 @@ class Cache{
     String subCategory;
     String productName;
     String cost;
+
+    /**
+     * @param key
+     * @param id
+     * @param category
+     * @param subCategory
+     * @param productName
+     * @param cost
+     */
     Cache(int key, int id,String category,String subCategory,String productName,String cost) {
         this.key = key;
         this.id = id;
@@ -25,8 +34,16 @@ public class Lru{
     static Map<Integer, Cache> map = new HashMap<>();
     int CACHE_CAPACITY = 4;
 
-    public void putElementInCache(int key, int id,String category,String subCategory,String productName,String cost)
-    {
+    /**
+     * @param key
+     * @param id
+     * @param category
+     * @param subCategory
+     * @param productName
+     * @param cost
+     * this method will put the elements in cache
+     */
+    public void putElementInCache(int key, int id,String category,String subCategory,String productName,String cost) {
         if(map.containsKey(key))
         {
             Cache currentValue= map.get(key);
@@ -45,8 +62,11 @@ public class Lru{
         map.put(key, newItem);
     }
 
-    public int getElementFromCache(int key)
-    {
+    /**
+     * @param key
+     * @return int, if the searching key is found it will return id or else it will return -1
+     */
+    public int getElementFromCache(int key) {
         if(map.containsKey(key))
         {
             Cache current = map.get(key);
@@ -60,6 +80,9 @@ public class Lru{
         return -1;
     }
 
+    /**
+     * @return list of string which will include the information of categories.
+     */
     public static List<String> displayCategories(){
         List<String> categories=new ArrayList<>();
         for(Integer key:map.keySet()){
