@@ -59,6 +59,18 @@ public class Lru{
         System.out.println("if searching key doesn't exits it will print -1");
         return -1;
     }
+
+    public static List<String> displayCategories(){
+        List<String> categories=new ArrayList<>();
+        for(Integer key:map.keySet()){
+
+            if(!categories.contains(map.get(key).category)){
+                categories.add(map.get(key).category);
+            }
+        }return categories;
+
+    }
+
 public static void main(String[] args){
     Lru cache = new Lru();
     cache.putElementInCache(1, 1,"electronic","mobiles","oppo","12000");
@@ -74,5 +86,7 @@ public static void main(String[] args){
     System.out.println();
     System.out.println(deque);
     System.out.println();
+    List<String> categories=displayCategories();
+    System.out.println("categories: "+categories);
 }
 }
