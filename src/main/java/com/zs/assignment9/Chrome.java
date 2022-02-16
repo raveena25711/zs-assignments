@@ -17,12 +17,12 @@ public class Chrome {
         driver.findElement(By.linkText("Login")).click();
         Thread.sleep(2000);
         WebElement email = driver.findElement(By.cssSelector("input[placeholder='Enter your active Email ID / Username']"));
-        email.sendKeys("raveenanalla01@gmail.com");
+        email.sendKeys("email");
         WebElement password = driver.findElement(By.cssSelector("input[placeholder=\"Enter your password\"]"));
-        password.sendKeys("raveenanaukri01@");
+        password.sendKeys("password");
         driver.findElement(By.cssSelector("button[type='submit']")).click();
         Thread.sleep(8000);
-        driver.findElement(By.xpath("//div[@title='Nalla Raveena']")).click();
+        driver.findElement(By.xpath("//div[@title='name']")).click();
         Thread.sleep(8000);
         String path = "src/main/java/com/zs/assignment9/resume/RAVEENA__RESUME.pdf";
         File file = new File(path);

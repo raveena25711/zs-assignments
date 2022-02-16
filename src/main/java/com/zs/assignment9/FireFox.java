@@ -18,12 +18,12 @@ public class FireFox {
         loginButton.click();
         Thread.sleep(8000);
         WebElement email = driver.findElement(By.cssSelector("input[placeholder='Enter your active Email ID / Username']"));
-        email.sendKeys("raveenanalla01@gmail.com");
+        email.sendKeys("email");
         WebElement password = driver.findElement(By.cssSelector("input[placeholder=\"Enter your password\"]"));
-        password.sendKeys("raveenanaukri01@");
+        password.sendKeys("password");
         driver.findElement(By.cssSelector("button[type='submit']")).click();
         Thread.sleep(8000);
-        driver.findElement(By.xpath("//div[@title='Nalla Raveena']")).click();
+        driver.findElement(By.xpath("//div[@title='name']")).click();
         Thread.sleep(8000);
         driver.findElement(By.cssSelector("i[title='Click here to download your resume']")).click();
         Robot robot = new Robot();
